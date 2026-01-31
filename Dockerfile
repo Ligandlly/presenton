@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     libreoffice \
     fontconfig \
-    chromium
+    chromium \
+    zstd
 
 
 # Install Node.js 20 using NodeSource repository
@@ -31,6 +32,12 @@ RUN pip install aiohttp aiomysql aiosqlite asyncpg fastapi[standard] \
     pathvalidate pdfplumber chromadb sqlmodel \
     anthropic google-genai openai fastmcp dirtyjson
 RUN pip install docling --extra-index-url https://download.pytorch.org/whl/cpu
+
+# Pre-download ONNX model for icon embedding to avoid runtime download timeout
+RUN python3 -c "from chromadb.utils.embedding_functions import ONNXMiniLM_L6_V2; \
+ef = ONNXMiniLM_L6_V2(); \
+ef.DOWNLOAD_PATH = '/app/chroma/models'; \
+ef._download_model_if_not_exists()"
 
 # Install dependencies for Next.js
 WORKDIR /app/servers/nextjs

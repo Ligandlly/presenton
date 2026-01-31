@@ -15,45 +15,47 @@ def get_system_prompt(
     instructions: Optional[str] = None,
 ):
     return f"""
-    Edit Slide data and speaker note based on provided prompt, follow mentioned steps and notes and provide structured output.
+    根据提供的提示编辑幻灯片数据和演讲者备注，遵循以下步骤和注意事项并提供结构化输出。
 
-    {"# User Instruction:" if instructions else ""}
+    必须以简体中文输出所有内容。
+
+    {"# 用户指令:" if instructions else ""}
     {instructions or ""}
 
-    {"# Tone:" if tone else ""}
+    {"# 语气:" if tone else ""}
     {tone or ""}
 
-    {"# Verbosity:" if verbosity else ""}
+    {"# 详细程度:" if verbosity else ""}
     {verbosity or ""}
 
-    # Notes
-    - Provide output in language mentioned in **Input**.
-    - The goal is to change Slide data based on the provided prompt.
-    - Do not change **Image prompts** and **Icon queries** if not asked for in prompt.
-    - Generate **Image prompts** and **Icon queries** if asked to generate or change in prompt.
-    - Make sure to follow language guidelines.
-    - Speaker note should be normal text, not markdown.
-    - Speaker note should be simple, clear, concise and to the point.
+    # 注意事项
+    - 根据**输入**中提到的语言输出内容。
+    - 目标是根据提供的提示更改幻灯片数据。
+    - 如果提示中没有要求，不要更改**图片提示词**和**图标查询**。
+    - 如果提示中要求生成或更改，则生成**图片提示词**和**图标查询**。
+    - 确保遵循语言规范。
+    - 演讲者备注应为纯文本，而非markdown格式。
+    - 演讲者备注应该简单、清晰、简洁、切中要点。
 
-    **Go through all notes and steps and make sure they are followed, including mentioned constraints**
+    **请仔细阅读所有注意事项和步骤，确保遵循，包括提到的约束条件**
     """
 
 
 def get_user_prompt(prompt: str, slide_data: dict, language: str):
     return f"""
-        ## Icon Query And Image Prompt Language
-        English
+        ## 图标查询和图片提示词语言
+        中文
 
-        ## Current Date and Time
+        ## 当前日期和时间
         {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
-        ## Slide Content Language
+        ## 幻灯片内容语言
         {language}
 
-        ## Prompt
+        ## 提示
         {prompt}
 
-        ## Slide data
+        ## 幻灯片数据
         {slide_data}
     """
 

@@ -50,7 +50,7 @@ export const EditControls: React.FC<EditControlsProps> = ({
               className="flex items-center gap-1"
             >
               <Pencil size={14} />
-              Draw
+              绘制
             </Button>
 
             <Button
@@ -60,7 +60,7 @@ export const EditControls: React.FC<EditControlsProps> = ({
               className="flex items-center gap-1"
             >
               <Eraser size={14} />
-              Erase
+              擦除
             </Button>
           </div>
 
@@ -112,7 +112,7 @@ export const EditControls: React.FC<EditControlsProps> = ({
             className="flex items-center gap-1"
           >
             <RotateCcw size={14} />
-            Clear
+            清除
           </Button>
         </div>
 
@@ -133,12 +133,12 @@ export const EditControls: React.FC<EditControlsProps> = ({
           htmlFor="edit-prompt"
           className="text-sm font-medium font-inter text-gray-700"
         >
-          Describe the changes you want to make:
+          描述您想要的更改：
         </label>
         <div className="flex gap-2">
           <Textarea
             id="edit-prompt"
-            placeholder="Enter your prompt here... (e.g., 'Change the title color to blue', 'Add a border to the image', etc.)"
+            placeholder="在此输入您的提示词...（例如：将标题颜色改为蓝色，给图片添加边框等）"
             value={prompt}
             onChange={(e) => onPromptChange(e.target.value)}
             className="flex-1 font-inter duration-300 h-[70px] border-blue-200 border-2 rounded-lg outline-none focus:border-blue-500 focus:ring-0 max-h-[70px] resize-none"
@@ -151,11 +151,11 @@ export const EditControls: React.FC<EditControlsProps> = ({
               className="flex flex-col w-28 font-inter font-semibold items-center gap-1 h-full bg-green-600 hover:bg-green-700 px-4"
             >
               {isUpdating ? (
-                "Updating..."
+                "更新中..."
               ) : (
                 <>
                   <SendHorizontal size={14} />
-                  Update
+                  更新
                 </>
               )}
             </Button>

@@ -10,89 +10,89 @@ import React, { useState, useEffect, useRef } from "react";
 const helpQuestions = [
   {
     id: 1,
-    category: "Images",
-    question: "How do I change an image?",
+    category: "图片",
+    question: "如何更换图片？",
     answer:
-      "Click on any image to reveal the image toolbar. You'll see options to Edit, Adjust position, and change how the image fits within its container. The Edit option allows you to replace or modify the current image.",
+      "点击任意图片以显示图片工具栏。您将看到编辑、调整位置以及更改图片显示方式的选项。编辑选项允许您替换或修改当前图片。",
   },
   {
     id: 2,
-    category: "Images",
-    question: "Can I generate new images with AI?",
+    category: "图片",
+    question: "可以使用AI生成新图片吗？",
     answer:
-      "Yes! Click on any image and select the Edit option from the toolbar. In the side panel that appears, you'll find the AI Generate tab. Enter your prompt describing the image you want, and our AI will generate an image based on your description.",
+      "可以！点击任意图片并从工具栏中选择编辑。在显示的侧面板中，您将找到AI生成选项卡。输入描述您想要图片的提示词，我们的AI将根据您的描述生成图片。",
   },
   {
     id: 3,
-    category: "Images",
-    question: "How do I upload my own images?",
+    category: "图片",
+    question: "如何上传自己的图片？",
     answer:
-      "Click on any image, then select Edit from the toolbar. In the side panel, click on the Upload tab at the top. You can browse your files to select one. Once uploaded, you can apply it to your design.",
+      "点击任意图片，然后从工具栏中选择编辑。在侧面板中，点击顶部的上传选项卡。您可以浏览文件以选择一个。上传后，您可以将其应用到您的设计中。",
   },
   {
     id: 11,
-    category: "AI Prompts",
-    question: "Can I change slide layout through prompt?",
+    category: "AI提示词",
+    question: "可以通过提示词更改幻灯片布局吗？",
     answer:
-      "Yes you can! Click on the WandSparkles icon on the top left of each slide and it will give you a prompt input box. Describe your layout requirements and the AI will change the slide layout accordingly.",
+      "可以！点击每张幻灯片左上角的魔棒图标，它会显示一个提示词输入框。描述您的布局要求，AI将相应地更改幻灯片布局。",
   },
   {
     id: 12,
-    category: "AI Prompts",
-    question: "Can I change slide image through prompt?",
+    category: "AI提示词",
+    question: "可以通过提示词更改幻灯片图片吗？",
     answer:
-      "Yes you can! Click on the WandSparkles icon on the top left of each slide and it will give you a prompt input box. Describe the image you want and the AI will update the slide image based on your requirements.",
+      "可以！点击每张幻灯片左上角的魔棒图标，它会显示一个提示词输入框。描述您想要的图片，AI将根据您的要求更新幻灯片图片。",
   },
 
   {
     id: 14,
-    category: "AI Prompts",
-    question: "Can I change content through prompt?",
+    category: "AI提示词",
+    question: "可以通过提示词更改内容吗？",
     answer:
-      "Yes you can! Click on the WandSparkles icon on the top left of each slide and it will give you a prompt input box. Describe what content you want and the AI will update the slide's text and content based on your description.",
+      "可以！点击每张幻灯片左上角的魔棒图标，它会显示一个提示词输入框。描述您想要的内容，AI将根据您的描述更新幻灯片的文字和内容。",
   },
   {
     id: 4,
-    category: "Text",
-    question: "How can I format and highlight text?",
+    category: "文字",
+    question: "如何格式化和高亮文字？",
     answer:
-      "Select any text to see the formatting toolbar appear. You'll have options for Bold, Italic, Underline, Strikethrough,and more.",
+      "选择任意文字以显示格式工具栏。您将获得加粗、斜体、下划线、删除线等选项。",
   },
   {
     id: 5,
-    category: "Icons",
-    question: "How do I change icons?",
+    category: "图标",
+    question: "如何更换图标？",
     answer:
-      "Click on any existing icon to modify it. In the icon selector panel, you can browse icos or use the search function to find specific icons. We offer thousands of icons in various styles.",
+      "点击任何现有图标进行修改。在图标选择面板中，您可以浏览图标或使用搜索功能查找特定图标。我们提供各种样式的数千个图标。",
   },
   {
     id: 16,
-    category: "Layout",
-    question: "Can I change the position of slide?",
+    category: "布局",
+    question: "可以更改幻灯片的位置吗？",
     answer:
-      "Of course, On side panel you can drag the slide and place wherever you want.",
+      "当然可以，在侧面板中您可以拖动幻灯片并将其放置到任何您想要的位置。",
   },
   {
     id: 15,
-    category: "Layout",
-    question: "Can I add new slide between the slide?",
+    category: "布局",
+    question: "可以在幻灯片之间添加新幻灯片吗？",
     answer:
-      "Yes you can just click on the plus icon below each slide.It will display the all the layouts and choose required one.",
+      "可以，只需点击每张幻灯片下方的加号图标。它将显示所有布局，您可以选择所需的布局。",
   },
   {
     id: 6,
-    category: "Layout",
-    question: "Can I add more sections to my slides?",
+    category: "布局",
+    question: "可以向幻灯片添加更多部分吗？",
     answer:
-      "Absolutely! Hover near the bottom of any text box or content block, and you'll see a + icon appear. Click this button to add a new section below the current one. You can also use the Insert menu to add specific section types.",
+      "当然可以！将鼠标悬停在任何文本框或内容块的底部，您将看到一个+图标出现。点击此按钮在当前部分下方添加新部分。您也可以使用插入菜单添加特定的部分类型。",
   },
 
   {
     id: 8,
-    category: "Export",
-    question: "How do I download or export my presentation?",
+    category: "导出",
+    question: "如何下载或导出演示文稿？",
     answer:
-      "Click the Export button in the top right menu. You can choose to download as PDF, PowerPoint.",
+      "点击右上角菜单中的导出按钮。您可以选择下载为PDF或PowerPoint格式。",
   },
 ];
 
@@ -187,7 +187,7 @@ const Help = () => {
         <div className="bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden">
           {/* Header */}
           <div className="bg-emerald-600 text-white px-6 py-4 flex justify-between items-center">
-            <h2 className="text-lg font-medium">Help Center</h2>
+            <h2 className="text-lg font-medium">帮助中心</h2>
             <button
               onClick={() => setIsOpen(false)}
               className="hover:bg-emerald-700 p-1 rounded"
@@ -201,7 +201,7 @@ const Help = () => {
             <div className="relative">
               <input
                 type="text"
-                placeholder="Search help topics..."
+                placeholder="搜索帮助主题..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
@@ -256,7 +256,7 @@ const Help = () => {
               </Accordion>
             ) : (
               <div className="py-8 text-center text-gray-500">
-                <p>No results found for "{searchQuery}"</p>
+                <p>未找到"{searchQuery}"的相关结果</p>
                 <button
                   onClick={() => {
                     setSearchQuery("");
@@ -264,7 +264,7 @@ const Help = () => {
                   }}
                   className="mt-2 text-emerald-600 hover:underline text-sm"
                 >
-                  Clear search
+                  清除搜索
                 </button>
               </div>
             )}
@@ -272,9 +272,9 @@ const Help = () => {
 
           {/* Footer */}
           <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 text-xs text-gray-500 text-center">
-            Still need help?{" "}
+            仍然需要帮助？{" "}
             <a href="/contact" className="text-emerald-600 hover:underline">
-              Contact Support
+              联系支持
             </a>
           </div>
         </div>

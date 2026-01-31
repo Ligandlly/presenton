@@ -36,17 +36,17 @@ export const FileUploadSection: React.FC<FileUploadSectionProps> = ({
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Upload className="w-5 h-5" />
-          Upload PDF or PPTX File
+          上传 PDF 或 PPTX 文件
         </CardTitle>
         <CardDescription>
-          Select a PDF or PowerPoint file (.pdf or .pptx) to process. Maximum file size: 100MB
+          选择要处理的 PDF 或 PowerPoint 文件（.pdf 或 .pptx）。最大文件大小：100MB
         </CardDescription>
         {slides.length > 0 && (
           <div className="flex items-center justify-end gap-2">
             {slides.some((s) => s.processing) && (
               <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
             )}
-            {completedSlides}/{slides.length} slides completed
+            {completedSlides}/{slides.length} 张幻灯片已完成
           </div>
         )}
       </CardHeader>
@@ -56,7 +56,7 @@ export const FileUploadSection: React.FC<FileUploadSectionProps> = ({
             <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <Label htmlFor="file-upload" className="cursor-pointer">
               <span className="text-lg font-medium text-gray-700">
-                Click to upload a PDF or PPTX file
+                点击上传 PDF 或 PPTX 文件
               </span>
               <input
                 id="file-upload"
@@ -67,7 +67,7 @@ export const FileUploadSection: React.FC<FileUploadSectionProps> = ({
               />
             </Label>
             <p className="text-sm text-gray-500 mt-2">
-              Drag and drop your file here or click to browse
+              将文件拖放到此处或点击浏览
             </p>
           </div>
         ) : (
@@ -104,10 +104,10 @@ export const FileUploadSection: React.FC<FileUploadSectionProps> = ({
             className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
           >
             {isProcessingPptx
-              ? "Extracting Slides..."
+              ? "正在提取幻灯片..."
               : !selectedFile
-              ? "Select a PDF or PPTX file"
-              : "Process File"}
+              ? "选择 PDF 或 PPTX 文件"
+              : "处理文件"}
           </Button>
           {isProcessingPptx && <Timer duration={90} />}
         </div>

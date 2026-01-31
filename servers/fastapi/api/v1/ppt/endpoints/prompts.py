@@ -1,33 +1,33 @@
 GENERATE_HTML_SYSTEM_PROMPT = """
-You need to generate html and tailwind code for given presentation slide image. Generated code will be used as template for different content. You need to think through each design elements and then decide where each element should go.
-Follow these rules strictly:
-- Make sure the design from html and tailwind is exact to the slide. 
-- Make sure all components are in their own place. 
-- Make sure size of elements are exact. Check sizes of images and other elements from OXML and convert them to pixels.
-- Make sure all components should be noted of and should be added as it is.
-- Image's and icons's size and position should be added exactly as it is.
-- Read through the OXML data of slide and then match exact position ans size of elements. Make sure to convert between dimension and pixels. 
-- Make sure the vertical and horizonal spacing between elements are same as in the image. Try to get spacing from the OXML document as well. Make sure no elements overflows because of high spacing.
-- Do not use absolute position unless absolutely necessary. Use flex, grid and spacing to properly arrange components.
-- First, layout everything using flex or grid. Try to fit all the components using this layout. Finally, if you cannot layout any element without flex and grid, then only use absolute to place the element.
-- Analyze each text's available space and it's design, and give minimum characters to fill in the text for the space and context and maximum that the space can handle. Be  conservative with how many characters text space can handle. Make sure no text overflows and decide as to not disrupt the slide.  Do this for every text. 
-- Bullet elements or bullet cards (one with pointers) should be placed one after another and should be flexible to hold more or less bullet points than in the image. Analyze the number of bullet points the slide can handle and add style properties accordingly. Also add a comment below the bullets for min and max bullet points supported.  Make sure the number you quote should fit in the available space. Don't  be too ambitious. 
-- For each text add font size and font family as tailwind property. Preferably pick them from OXML and convert dimensions instead of guessing from given image.
-- Make sure that no elements overflow or exceed slide bounding in any way.
-- Properly export shapes as exact SVG.
-- Add relevant font in tailwind to all texts.   
-- Wrap the output code inside these classes: \"relative w-full rounded-sm max-w-[1280px] shadow-lg max-h-[720px] aspect-video bg-white relative z-20 mx-auto overflow-hidden\". 
-- For image everywhere use https://images.pexels.com/photos/31527637/pexels-photo-31527637.jpeg
-- Image should never be inside of a SVG.
-- Replace brand icons with a circle of same size with "i" between. Generic icons like "email", "call", etc should remain same.
-- If there is a box/card enclosing a text, make it grow as well when the text grows, so that the text does not overflow the box/card.
-- Give out only HTML and Tailwind code. No other texts or explanations. 
-- Do not give entire HTML structure with head, body, etc. Just give the respective HTML and Tailwind code inside div with above classes.
-- If a list of fonts is provided, the pick matching font for the text from the list and style with tailwind font-family property. Use following format: font-["font-name"]
+你需要为给定的演示文稿幻灯片图像生成html和tailwind代码。生成的代码将用作不同内容的模板。你需要仔细考虑每个设计元素，然后决定每个元素应该放在哪里。
+严格遵循以下规则：
+- 确保html和tailwind的设计与幻灯片完全一致。
+- 确保所有组件都在各自的位置上。
+- 确保元素尺寸精确。从OXML中检查图片和其他元素的尺寸并转换为像素。
+- 确保所有组件都被记录并原样添加。
+- 图片和图标的尺寸和位置应完全按照原样添加。
+- 阅读幻灯片的OXML数据，然后匹配元素的确切位置和尺寸。确保在尺寸和像素之间正确转换。
+- 确保元素之间的垂直和水平间距与图像中的相同。尝试从OXML文档中获取间距。确保不要因为间距过大而导致元素溢出。
+- 不要使用绝对定位，除非绝对必要。使用flex、grid和间距来正确排列组件。
+- 首先，使用flex或grid布局所有内容。尝试使用这种布局来适应所有组件。最后，只有在使用flex和grid无法布局任何元素时，才使用绝对定位来放置元素。
+- 分析每个文本的可用空间及其设计，给出填充文本所需的最少字符数和空间可以容纳的最大字符数。对于文本空间可以容纳的字符数要保守。确保文本不会溢出，并决定不要破坏幻灯片。对每个文本都这样做。
+- 列表元素或列表卡片（带符号的）应该一个接一个地放置，并且应该比图像中更灵活地容纳更多或更少的列表项。分析幻灯片可以容纳的列表项数量，并相应地添加样式属性。同时在列表下方添加支持的最少和最多列表项数的注释。确保你引用的数字能适应可用空间。不要太贪心。
+- 为每个文本添加字体大小和字体family作为tailwind属性。最好从OXML中选取并转换尺寸，而不是从给定图像中猜测。
+- 确保没有任何元素溢出或超过幻灯片边界。
+- 正确地将形状导出为精确的SVG。
+- 为所有文本添加相关的tailwind字体。
+- 将输出代码包装在这些类中: \"relative w-full rounded-sm max-w-[1280px] shadow-lg max-h-[720px] aspect-video bg-white relative z-20 mx-auto overflow-hidden\"。
+- 对于图片，请始终使用 https://images.pexels.com/photos/31527637/pexels-photo-31527637.jpeg
+- 图片永远不应该在SVG内部。
+- 将品牌图标替换为相同大小的圆圈，中间带有"i"。通用图标如"email"、"call"等应保持不变。
+- 如果有框/卡片包围文本，当文本增长时也要使其增长，这样文本就不会溢出框/卡片。
+- 只输出HTML和Tailwind代码。不添加其他文字或解释。
+- 不要给出整个HTML结构（包含head、body等）。只需在上述类的div内提供相应的HTML和Tailwind代码。
+- 如果提供了字体列表，请从列表中为文本选择匹配的字体，并使用tailwind font-family属性设置样式。使用以下格式: font-["font-name"]
 """
 
 HTML_TO_REACT_SYSTEM_PROMPT = """
-Convert given static HTML and Tailwind slide to a TSX React component so that it can be dynamically populated. Follow these rules strictly while converting:
+将给定的静态HTML和Tailwind幻灯片转换为TSX React组件，以便可以动态填充内容。转换时请严格遵循以下规则：
 
 1) Required imports, a zod schema and HTML layout has to be generated.
 2) Schema will populate the layout so make sure schema has fields for all text, images and icons in the layout.
@@ -236,6 +236,6 @@ const dynamicSlideLayout: React.FC<BulletWithIconsSlideLayoutProps> = ({ data: s
 """
 
 HTML_EDIT_SYSTEM_PROMPT = """
-You need to edit given html with respect to the indication and sketch in the given UI. You'll be given the code for current UI which is in presentation size, along with its visualization in image form. Over that you'll also be given another image which has indications of what might change in form of sketch in the UI. You will have to return the edited html with tailwind with the changes as indicated on the image and through prompt. Make sure you think through the design before making the change and also make sure you don't change the non-indicated part. Try to follow the design style of current content for generated content. If sketch image is not provided, then you need to edit the html with respect to the prompt. Make sure size of the presentation does not change in any cirsumstance. Only give out code and nothing else.
+你需要根据UI中的指示和草图来编辑给定的html。你将获得当前UI的代码（演示文稿大小），以及其图像形式的可视化。此外，你还会得到另一张图像，其中包含UI中可能发生变化的草图指示。你需要返回编辑后的html和tailwind，应用图像和提示中指示的更改。确保在做出更改之前仔细考虑设计，同时确保不要更改未指示的部分。尝试为生成的内容遵循当前内容的设计风格。如果未提供草图图像，则需要根据提示编辑html。确保演示文稿的大小在任何情况下都不会改变。只输出代码，不添加其他内容。
 """
 

@@ -33,7 +33,7 @@ const Header = () => {
               role="menuitem"
             >
               <FilePlus2 className="w-5 h-5" />
-              <span className="text-sm font-medium font-inter">Create Template</span>
+              <span className="text-sm font-medium font-inter">创建模板</span>
             </Link>
             <Link
               href="/template-preview"
@@ -43,7 +43,7 @@ const Header = () => {
               role="menuitem"
             >
               <Layout className="w-5 h-5" />
-              <span className="text-sm font-medium font-inter">Templates</span>
+              <span className="text-sm font-medium font-inter">模板</span>
             </Link>
             <HeaderNav />
           </div>

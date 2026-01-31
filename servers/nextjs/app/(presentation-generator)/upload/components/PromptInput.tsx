@@ -25,7 +25,7 @@ export function PromptInput({
           value={value}
           rows={5}
           onChange={(e) => handleChange(e.target.value)}
-          placeholder="Tell us about your presentation"
+          placeholder="告诉我们您的演示主题"
           data-testid="prompt-input"
           className={`py-4 px-5 border-2 font-medium font-instrument_sans text-base min-h-[150px] max-h-[300px] border-[#5146E5] focus-visible:ring-offset-0  focus-visible:ring-[#5146E5] overflow-y-auto  custom_scrollbar  `}
         />
@@ -34,8 +34,7 @@ export function PromptInput({
         className={`text-sm text-gray-500 font-inter font-medium ${showHint ? "opacity-100" : "opacity-0"
           }`}
       >
-        Provide specific details about your presentation needs (e.g., topic,
-        style, key points) for more accurate results
+        请提供演示文稿需求的详细信息（例如：主题、风格、关键要点）以获得更准确的结果
       </p>
     </div>
   );

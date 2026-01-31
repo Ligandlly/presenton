@@ -28,32 +28,32 @@ import { LLMConfig } from "@/types/llm_config";
 
 const DALLE_3_QUALITY_OPTIONS = [
   {
-    label: "Standard",
+    label: "标准",
     value: "standard",
-    description: "Faster generation with lower cost",
+    description: "更快的生成速度，更低的成本",
   },
   {
-    label: "HD",
+    label: "高清",
     value: "hd",
-    description: "Higher quality images with increased cost",
+    description: "更高质量的图片，但成本更高",
   },
 ];
 
 const GPT_IMAGE_1_5_QUALITY_OPTIONS = [
   {
-    label: "Low",
+    label: "低",
     value: "low",
-    description: "Fastest and most cost-effective",
+    description: "最快且最具成本效益",
   },
   {
-    label: "Medium",
+    label: "中",
     value: "medium",
-    description: "Balanced quality and speed",
+    description: "平衡的质量和速度",
   },
   {
-    label: "High",
+    label: "高",
     value: "high",
-    description: "Best quality with longer generation time",
+    description: "最佳质量，生成时间较长",
   },
 ];
 
@@ -131,14 +131,14 @@ export default function LLMProviderSelection({
         needsOllamaUrl ||
         needsComfyUIConfig,
       text: needsModelSelection
-        ? "Please Select a Model"
+        ? "请选择模型"
         : needsApiKey
-        ? "Please Enter API Key"
+        ? "请输入API密钥"
         : needsOllamaUrl
-        ? "Please Enter Ollama URL"
+        ? "请输入Ollama URL"
         : needsComfyUIConfig
-        ? "Please Configure ComfyUI"
-        : "Save Configuration",
+        ? "请配置ComfyUI"
+        : "保存配置",
       showProgress: false,
     });
   }, [llmConfig]);
@@ -259,7 +259,7 @@ export default function LLMProviderSelection({
       return (
         <div className="mb-8">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            DALL·E 3 Image Quality
+            DALL·E 3 图片质量
           </label>
           <div className="grid grid-cols-2 gap-3">
             {DALLE_3_QUALITY_OPTIONS.map((option) => (
@@ -293,7 +293,7 @@ export default function LLMProviderSelection({
       return (
         <div className="mb-8">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            GPT Image 1.5 Quality
+            GPT Image 1.5 质量
           </label>
           <div className="grid grid-cols-3 gap-3">
             {GPT_IMAGE_1_5_QUALITY_OPTIONS.map((option) => (
@@ -410,7 +410,7 @@ export default function LLMProviderSelection({
         <div className="my-8">
           <div className="flex items-center justify-between mb-4 bg-green-50 p-2 rounded-sm">
             <label className="text-sm font-medium text-gray-700">
-              Disable Image Generation
+              禁用图片生成
             </label>
             <Switch
               checked={isImageGenerationDisabled}
@@ -424,8 +424,7 @@ export default function LLMProviderSelection({
           </div>
           <p className="text-sm text-gray-500 flex items-center gap-2">
             <span className="block w-1 h-1 rounded-full bg-gray-400"></span>
-            When enabled, slides will not include automatically generated
-            images.
+            启用后，幻灯片将不包含自动生成的图片。
           </p>
         </div>
 
@@ -434,7 +433,7 @@ export default function LLMProviderSelection({
             {/* Image Provider Selection */}
             <div className="my-8">
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                Select Image Provider
+                选择图片提供商
               </label>
               <div className="w-full">
                 <Popover
@@ -453,7 +452,7 @@ export default function LLMProviderSelection({
                           {llmConfig.IMAGE_PROVIDER
                             ? IMAGE_PROVIDERS[llmConfig.IMAGE_PROVIDER]
                                 ?.label || llmConfig.IMAGE_PROVIDER
-                            : "Select image provider"}
+                            : "选择图片提供商"}
                         </span>
                       </div>
                       <ChevronsUpDown className="w-4 h-4 text-gray-500" />
@@ -465,9 +464,9 @@ export default function LLMProviderSelection({
                     style={{ width: "var(--radix-popover-trigger-width)" }}
                   >
                     <Command>
-                      <CommandInput placeholder="Search provider..." />
+                      <CommandInput placeholder="搜索提供商..." />
                       <CommandList>
-                        <CommandEmpty>No provider found.</CommandEmpty>
+                        <CommandEmpty>未找到提供商。</CommandEmpty>
                         <CommandGroup>
                           {Object.values(IMAGE_PROVIDERS).map(
                             (provider, index) => (
@@ -553,7 +552,7 @@ export default function LLMProviderSelection({
                     <div className="mb-8 space-y-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                          ComfyUI Server URL
+                          ComfyUI 服务器 URL
                         </label>
                         <div className="relative">
                           <input
@@ -571,8 +570,7 @@ export default function LLMProviderSelection({
                         </div>
                         <p className="mt-2 text-sm text-gray-500 flex items-center gap-2">
                           <span className="block w-1 h-1 rounded-full bg-gray-400"></span>
-                          Use your machine IP address (not localhost) when
-                          running in Docker
+                          在Docker中运行时，请使用机器的IP地址（而不是localhost）
                         </p>
                       </div>
                       <div>
@@ -611,7 +609,7 @@ export default function LLMProviderSelection({
                     <div className="relative">
                       <input
                         type="text"
-                        placeholder={`Enter your ${provider.apiKeyFieldLabel}`}
+                        placeholder={`输入您的${provider.apiKeyFieldLabel}`}
                         className="w-full px-4 py-2.5 outline-none border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors"
                         value={getApiKeyValue(provider.apiKeyField)}
                         onChange={(e) =>
@@ -624,7 +622,7 @@ export default function LLMProviderSelection({
                     </div>
                     <p className="mt-2 text-sm text-gray-500 flex items-center gap-2">
                       <span className="block w-1 h-1 rounded-full bg-gray-400"></span>
-                      API key for {provider.label} image generation
+                      {provider.label} 图片生成的API密钥
                     </p>
                   </div>
                 );
@@ -638,10 +636,10 @@ export default function LLMProviderSelection({
             <Info className="w-5 h-5 text-blue-500 mt-0.5" />
             <div>
               <h3 className="text-sm font-medium text-blue-900 mb-1">
-                Selected Models
+                已选模型
               </h3>
               <p className="text-sm text-blue-700">
-                Using{" "}
+                使用{" "}
                 {llmConfig.LLM === "ollama"
                   ? llmConfig.OLLAMA_MODEL ?? "xxxxx"
                   : llmConfig.LLM === "custom"
@@ -653,17 +651,17 @@ export default function LLMProviderSelection({
                   : llmConfig.LLM === "openai"
                   ? llmConfig.OPENAI_MODEL ?? "xxxxx"
                   : "xxxxx"}{" "}
-                for text generation{" "}
+                进行文本生成{" "}
                 {isImageGenerationDisabled ? (
-                  "and image generation is disabled."
+                  "，图片生成已禁用。"
                 ) : (
                   <>
-                    and{" "}
+                    和{" "}
                     {llmConfig.IMAGE_PROVIDER &&
                     IMAGE_PROVIDERS[llmConfig.IMAGE_PROVIDER]
                       ? IMAGE_PROVIDERS[llmConfig.IMAGE_PROVIDER].label
                       : "xxxxx"}{" "}
-                    for images
+                    进行图片生成
                   </>
                 )}
               </p>

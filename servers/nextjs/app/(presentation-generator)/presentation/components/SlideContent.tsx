@@ -46,7 +46,7 @@ const SlideContent = ({ slide, index, presentationId }: SlideContentProps) => {
     ) as HTMLInputElement;
     const value = element?.value;
     if (!value?.trim()) {
-      toast.error("Please enter a prompt before submitting");
+      toast.error("请在提交前输入提示词");
       return;
     }
     setIsUpdating(true);
@@ -60,7 +60,7 @@ const SlideContent = ({ slide, index, presentationId }: SlideContentProps) => {
 
       if (response) {
         dispatch(updateSlide({ index: slide.index, slide: response }));
-        toast.success("Slide updated successfully");
+        toast.success("幻灯片更新成功");
       }
     } catch (error: any) {
       console.error("Error in slide editing:", error);
@@ -83,8 +83,8 @@ const SlideContent = ({ slide, index, presentationId }: SlideContentProps) => {
 
     } catch (error: any) {
       console.error("Error deleting slide:", error);
-      toast.error("Error deleting slide.", {
-        description: error.message || "Error deleting slide.",
+      toast.error("删除幻灯片时出错", {
+        description: error.message || "删除幻灯片时出错。",
       });
     }
   };
@@ -158,7 +158,7 @@ const SlideContent = ({ slide, index, presentationId }: SlideContentProps) => {
 
           {!showNewSlideSelection && (
             <div className="group-hover:opacity-100 hidden md:block opacity-0 transition-opacity my-4 duration-300">
-              <ToolTip content="Add new slide below">
+              <ToolTip content="在下方添加新幻灯片">
                 {!isStreaming && !loading && (
                   <div
                     onClick={() => {
@@ -199,7 +199,7 @@ const SlideContent = ({ slide, index, presentationId }: SlideContentProps) => {
             <div className="absolute top-2 z-20 sm:top-4 hidden md:block left-2 sm:left-4 transition-transform">
               <Popover>
                 <PopoverTrigger>
-                  <ToolTip content="Update slide using prompt">
+                  <ToolTip content="使用提示词更新幻灯片">
                     <div
                       className={`p-2 group-hover:scale-105 rounded-lg bg-[#5141e5] hover:shadow-md transition-all duration-300 cursor-pointer shadow-md `}
                     >
@@ -223,7 +223,7 @@ const SlideContent = ({ slide, index, presentationId }: SlideContentProps) => {
                     >
                       <Textarea
                         id={`slide-${slide.index}-prompt`}
-                        placeholder="Enter your prompt here..."
+                        placeholder="在此输入您的提示词..."
                         className="w-full min-h-[100px] max-h-[100px] p-2 text-sm border rounded-lg focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                         disabled={isUpdating}
                         onKeyDown={(e) => {
@@ -244,7 +244,7 @@ const SlideContent = ({ slide, index, presentationId }: SlideContentProps) => {
                           trackEvent(MixpanelEvent.Slide_Update_From_Prompt_Button_Clicked, { pathname });
                         }}
                       >
-                        {isUpdating ? "Updating..." : "Update"}
+                        {isUpdating ? "更新中..." : "更新"}
                         <SendHorizontal className="w-4 sm:w-5 h-4 sm:h-5" />
                       </button>
                     </form>

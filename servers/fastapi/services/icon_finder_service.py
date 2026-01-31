@@ -11,14 +11,32 @@ class IconFinderService:
         self.client = chromadb.PersistentClient(
             path="chroma", settings=Settings(anonymized_telemetry=False)
         )
-        print("Initializing icons collection...")
-        self._initialize_icons_collection()
-        print("Icons collection initialized.")
+        self._initialized = False
+        print("IconFinderService instantiated (lazy init on first use)")
+
+    def _ensure_initialized(self):
+        if not self._initialized:
+            self._initialize_icons_collection()
+            self._initialized = True
 
     def _initialize_icons_collection(self):
-        self.embedding_function = ONNXMiniLM_L6_V2()
-        self.embedding_function.DOWNLOAD_PATH = "chroma/models"
-        self.embedding_function._download_model_if_not_exists()
+        import os
+        # Use pre-downloaded model from /app/chroma/models (built into Docker image)
+        # Fall back to runtime download if model doesn't exist (for non-Docker deployments)
+        default_model_path = "/app/chroma/models"
+        runtime_model_path = "chroma/models"
+
+        # Check if pre-downloaded model exists in Docker image
+        if os.path.exists(default_model_path) and os.listdir(default_model_path):
+            self.embedding_function = ONNXMiniLM_L6_V2()
+            self.embedding_function.DOWNLOAD_PATH = default_model_path
+            print(f"Using pre-downloaded ONNX model from {default_model_path}")
+        else:
+            # Fallback: download at runtime (requires network)
+            self.embedding_function = ONNXMiniLM_L6_V2()
+            self.embedding_function.DOWNLOAD_PATH = runtime_model_path
+            self.embedding_function._download_model_if_not_exists()
+            print("ONNX model not found in Docker image, downloading at runtime...")
         try:
             self.collection = self.client.get_collection(
                 self.collection_name, embedding_function=self.embedding_function
@@ -45,6 +63,7 @@ class IconFinderService:
                 self.collection.add(documents=documents, ids=ids)
 
     async def search_icons(self, query: str, k: int = 1):
+        self._ensure_initialized()
         result = await asyncio.to_thread(
             self.collection.query,
             query_texts=[query],

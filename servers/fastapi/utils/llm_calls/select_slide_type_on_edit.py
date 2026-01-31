@@ -16,21 +16,21 @@ def get_messages(
     return [
         LLMSystemMessage(
             content=f"""
-                Select a Slide Layout index based on provided user prompt and current slide data.
+                根据提供的用户提示和当前幻灯片数据选择幻灯片布局索引。
                 {layout.to_string()}
 
-                # Notes
-                - Do not select different slide layout than current unless absolutely necessary as per user prompt. 
-                - If user prompt is not clear, select the layout that is most relevant to the slide data.
-                - If user prompt is not clear, select the layout that is most relevant to the slide data.
-                **Go through all notes and steps and make sure they are followed, including mentioned constraints**
+                # 注意事项
+                - 不要选择与当前不同的幻灯片布局，除非用户提示绝对必要。
+                - 如果用户提示不清晰，选择与幻灯片数据最相关的布局。
+                - 如果用户提示不清晰，选择与幻灯片数据最相关的布局。
+                **请仔细阅读所有注意事项和步骤，确保遵循，包括提到的约束条件**
             """,
         ),
         LLMUserMessage(
             content=f"""
-                - User Prompt: {prompt}
-                - Current Slide Data: {slide_data}
-                - Current Slide Layout: {current_slide_layout}
+                - 用户提示: {prompt}
+                - 当前幻灯片数据: {slide_data}
+                - 当前幻灯片布局: {current_slide_layout}
             """,
         ),
     ]

@@ -15,45 +15,47 @@ def get_system_prompt(
     instructions: Optional[str] = None,
 ):
     return f"""
-        Generate structured slide based on provided outline, follow mentioned steps and notes and provide structured output.
+        根据提供的大纲生成结构化的幻灯片内容，遵循以下步骤和注意事项并提供结构化输出。
 
-        {"# User Instructions:" if instructions else ""}
+        必须以简体中文输出所有内容。
+
+        {"# 用户指令:" if instructions else ""}
         {instructions or ""}
 
-        {"# Tone:" if tone else ""}
+        {"# 语气:" if tone else ""}
         {tone or ""}
 
-        {"# Verbosity:" if verbosity else ""}
+        {"# 详细程度:" if verbosity else ""}
         {verbosity or ""}
 
-        # Steps
-        1. Analyze the outline.
-        2. Generate structured slide based on the outline.
-        3. Generate speaker note that is simple, clear, concise and to the point.
+        # 步骤
+        1. 分析大纲内容。
+        2. 根据大纲生成结构化的幻灯片。
+        3. 生成简洁明了的演讲者备注。
 
-        # Notes
-        - Slide body should not use words like "This slide", "This presentation".
-        - Rephrase the slide body to make it flow naturally.
-        - Only use markdown to highlight important points.
-        - Make sure to follow language guidelines.
-        - Speaker note should be normal text, not markdown.
-        - Strictly follow the max and min character limit for every property in the slide.
-        - Never ever go over the max character limit. Limit your narration to make sure you never go over the max character limit.
-        - Number of items should not be more than max number of items specified in slide schema. If you have to put multiple points then merge them to obey max numebr of items.
-        - Generate content as per the given tone.
-        - Be very careful with number of words to generate for given field. As generating more than max characters will overflow in the design. So, analyze early and never generate more characters than allowed.
-        - Do not add emoji in the content.
-        - Metrics should be in abbreviated form with least possible characters. Do not add long sequence of words for metrics.
-        - For verbosity:
-            - If verbosity is 'concise', then generate description as 1/3 or lower of the max character limit. Don't worry if you miss content or context.
-            - If verbosity is 'standard', then generate description as 2/3 of the max character limit.
-            - If verbosity is 'text-heavy', then generate description as 3/4 or higher of the max character limit. Make sure it does not exceed the max character limit.
+        # 注意事项
+        - 幻灯片正文不应使用"本幻灯片"、"本演示文稿"等词语。
+        - 重新措辞使幻灯片内容自然流畅。
+        - 只使用markdown来突出重要内容。
+        - 确保遵循语言规范。
+        - 演讲者备注应为纯文本，而非markdown格式。
+        - 严格遵守幻灯片各属性的最大和最小字符限制。
+        - 绝对不要超过最大字符限制。控制你的叙述以确保不超过最大字符限制。
+        - 项目数量不应超过幻灯片schema中指定的最大项目数。如果需要放置多个要点，请合并它们以符合最大项目数限制。
+        - 根据给定的语气生成内容。
+        - 严格控制生成内容的字数。超过最大字符数会导致设计溢出。因此，请提前分析，永远不要生成超过允许字符数的内容。
+        - 不要在内容中添加表情符号。
+        - 指标应使用缩写形式，使用尽可能少的字符。不要为指标添加一长串文字。
+        - 关于详细程度:
+            - 如果详细程度为'简洁'，则生成的内容应为最大字符限制的1/3或更少。不要担心遗漏内容或上下文。
+            - 如果详细程度为'标准'，则生成的内容应为最大字符限制的2/3。
+            - 如果详细程度为'内容丰富'，则生成的内容应为最大字符限制的3/4或更高。确保不要超过最大字符限制。
 
-        User instructions, tone and verbosity should always be followed and should supercede any other instruction, except for max and min character limit, slide schema and number of items.
+        用户指令、语气和详细程度应始终被遵循，并优先于其他指令（最大/最小字符限制、幻灯片schema和项目数量除外）。
 
-        - Provide output in json format and **don't include <parameters> tags**.
+        - 以JSON格式输出，**不要包含<parameters>标签**。
 
-        # Image and Icon Output Format
+        # 图片和图标输出格式
         image: {{
             __image_prompt__: string,
         }}
@@ -66,16 +68,16 @@ def get_system_prompt(
 
 def get_user_prompt(outline: str, language: str):
     return f"""
-        ## Current Date and Time
+        ## 当前日期和时间
         {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
-        ## Icon Query And Image Prompt Language
-        English
+        ## 图标查询和图片提示词语言
+        中文
 
-        ## Slide Content Language
+        ## 幻灯片内容语言
         {language}
 
-        ## Slide Outline
+        ## 幻灯片大纲
         {outline}
     """
 
