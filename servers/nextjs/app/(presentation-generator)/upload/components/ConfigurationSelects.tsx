@@ -150,7 +150,7 @@ const LanguageSelect: React.FC<{
         className="w-[200px] justify-between font-instrument_sans font-semibold overflow-hidden bg-blue-100 hover:bg-blue-100 border-blue-200 focus-visible:ring-blue-300 border-none"
       >
         <p className="text-sm font-medium truncate">
-          {value || "选择语言"}
+          {value || "简体中文"}
         </p>
         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
