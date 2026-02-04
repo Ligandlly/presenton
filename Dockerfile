@@ -22,6 +22,7 @@ WORKDIR /app
 ENV APP_DATA_DIRECTORY=/app_data
 ENV TEMP_DIRECTORY=/tmp/presenton
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV HUGGINGFACE_HUB_CACHE=/app/docling/models
 
 
 # Install ollama
@@ -38,6 +39,14 @@ RUN python3 -c "from chromadb.utils.embedding_functions import ONNXMiniLM_L6_V2;
 ef = ONNXMiniLM_L6_V2(); \
 ef.DOWNLOAD_PATH = '/app/chroma/models'; \
 ef._download_model_if_not_exists()"
+
+# Pre-download all docling models for offline processing
+RUN python3 -c "from pathlib import Path; \
+from docling.utils.model_downloader import download_models; \
+output_dir = Path('/app/docling/models'); \
+output_dir.mkdir(parents=True, exist_ok=True); \
+download_models(output_dir=output_dir, with_layout=True, with_tableformer=True, with_code_formula=True, with_picture_classifier=True, with_rapidocr=True, with_easyocr=False, progress=True); \
+print('All docling models downloaded successfully')"
 
 # Install dependencies for Next.js
 WORKDIR /app/servers/nextjs
@@ -65,4 +74,4 @@ COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
 
 # Start the servers
-CMD ["node", "/app/start.js"]
+CMD ["node", "/app/start.js", "--dev"]

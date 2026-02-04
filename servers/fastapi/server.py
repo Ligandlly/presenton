@@ -16,6 +16,6 @@ if __name__ == "__main__":
         "api.main:app",
         host="127.0.0.1",
         port=args.port,
-        log_level="info",
+        log_level="debug",
         reload=reload,
     )
