@@ -4,20 +4,18 @@ export interface UploadedFile {
   size: string;
 }
 export enum ThemeType {
-  Light = "浅色",
-  Dark = "深色",
-  Custom = "自定义",
-  Faint_Yellow = "淡黄色",
-  Royal_Blue = "皇家蓝",
-  Light_Red = "浅红色",
-  Dark_Pink = "深粉色",
+  Light = "light",
+  Dark = "dark",
+  Custom = "custom",
+  Faint_Yellow = "faint_yellow",
+  Royal_Blue = "royal_blue",
+  Light_Red = "light_red",
+  Dark_Pink = "dark_pink",
 }
 
 export enum LanguageType {
   // Major World Languages
   //   Auto = "Auto",
-  ChineseSimplified = "Chinese (Simplified - 中文, 汉语)",
-  ChineseTraditional = "Chinese (Traditional - 中文, 漢語)",
   English = "English",
   Spanish = "Spanish (Español)",
   French = "French (Français)",
@@ -26,6 +24,8 @@ export enum LanguageType {
   Italian = "Italian (Italiano)",
   Dutch = "Dutch (Nederlands)",
   Russian = "Russian (Русский)",
+  ChineseSimplified = "Chinese (Simplified - 中文, 汉语)",
+  ChineseTraditional = "Chinese (Traditional - 中文, 漢語)",
   Japanese = "Japanese (日本語)",
   Korean = "Korean (한국어)",
   Arabic = "Arabic (العربية)",
@@ -132,17 +132,17 @@ export interface PresentationConfig {
 }
 
 export enum ToneType {
-  Default = "默认",
-  Casual = "轻松随意",
-  Professional = "专业",
-  Funny = "幽默风趣",
-  Educational = "教育性",
-  Sales_Pitch = "推销演讲",
+  Default = "default",
+  Casual = "casual",
+  Professional = "professional",
+  Funny = "funny",
+  Educational = "educational",
+  Sales_Pitch = "sales_pitch",
 }
 
 export enum VerbosityType {
-  Concise = "简洁",
-  Standard = "标准",
-  Text_Heavy = "文字密集",
+  Concise = "concise",
+  Standard = "standard",
+  Text_Heavy = "text-heavy",
 }
 
