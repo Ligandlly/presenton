@@ -40,6 +40,22 @@ type SlideOption = "5" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "
 // Constants
 const SLIDE_OPTIONS: SlideOption[] = ["5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"];
 
+const ChineseToneType: Record<ToneType, string> = {
+  [ToneType.Default]: "默认",
+  [ToneType.Casual]: "轻松",
+  [ToneType.Professional]: "专业",
+  [ToneType.Funny]: "幽默",
+  [ToneType.Educational]: "教育",
+  [ToneType.Sales_Pitch]: "推销",
+}
+
+const ChineseVerbosityType: Record<VerbosityType, string> = {
+  [VerbosityType.Concise]: "简洁",
+  [VerbosityType.Standard]: "标准",
+  [VerbosityType.Text_Heavy]: "详细",
+}
+
+
 /**
  * Renders a select component for slide count
  */
@@ -277,7 +293,7 @@ export function ConfigurationSelects({
                 <SelectContent className="font-instrument_sans">
                   {Object.values(ToneType).map((tone) => (
                     <SelectItem key={tone} value={tone} className="text-sm font-medium capitalize">
-                      {tone}
+                      {ChineseToneType[tone]}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -298,7 +314,7 @@ export function ConfigurationSelects({
                 <SelectContent className="font-instrument_sans">
                   {Object.values(VerbosityType).map((verbosity) => (
                     <SelectItem key={verbosity} value={verbosity} className="text-sm font-medium capitalize">
-                      {verbosity}
+                      {ChineseVerbosityType[verbosity]}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -328,7 +344,7 @@ export function ConfigurationSelects({
               </div>
               <p className="text-xs text-gray-600">在开头包含一个标题幻灯片。</p>
             </div>
-            <div className="w-full flex flex-col gap-2 p-3 rounded-md bg-blue-100 border-blue-200">
+            {/* <div className="w-full flex flex-col gap-2 p-3 rounded-md bg-blue-100 border-blue-200">
               <div className="flex items-center justify-between">
                 <label className="text-sm font-semibold text-gray-700">网络搜索</label>
                 <Switch
@@ -337,7 +353,7 @@ export function ConfigurationSelects({
                 />
               </div>
               <p className="text-xs text-gray-600">允许模型使用网络搜索获取最新信息。</p>
-            </div>
+            </div> */}
 
             {/* 说明 */}
             <div className="w-full sm:col-span-2 flex flex-col gap-2">

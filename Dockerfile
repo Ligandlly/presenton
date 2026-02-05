@@ -74,4 +74,4 @@ COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
 
 # Start the servers
-CMD ["node", "/app/start.js", "--dev"]
+CMD ["node", "/app/start.js"]
