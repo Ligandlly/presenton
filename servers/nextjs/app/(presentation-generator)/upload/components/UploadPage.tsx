@@ -41,11 +41,14 @@ const UploadPage = () => {
   const pathname = usePathname();
   const dispatch = useDispatch();
 
+  // Get the first language from the language list as default
+  const defaultLanguage = Object.values(LanguageType)[0];
+
   // State management
   const [files, setFiles] = useState<File[]>([]);
   const [config, setConfig] = useState<PresentationConfig>({
     slides: "8",
-    language: LanguageType.English,
+    language: defaultLanguage,
     prompt: "",
     tone: ToneType.Default,
     verbosity: VerbosityType.Standard,
