@@ -14,10 +14,6 @@ import {
 } from "./ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
-import OpenAIConfig from "./OpenAIConfig";
-import GoogleConfig from "./GoogleConfig";
-import AnthropicConfig from "./AnthropicConfig";
-import OllamaConfig from "./OllamaConfig";
 import CustomConfig from "./CustomConfig";
 import {
   updateLLMConfig,
@@ -91,11 +87,7 @@ export default function LLMProviderSelection({
 
   useEffect(() => {
     const needsModelSelection =
-      (llmConfig.LLM === "openai" && !llmConfig.OPENAI_MODEL) ||
-      (llmConfig.LLM === "google" && !llmConfig.GOOGLE_MODEL) ||
-      (llmConfig.LLM === "ollama" && !llmConfig.OLLAMA_MODEL) ||
-      (llmConfig.LLM === "custom" && !llmConfig.CUSTOM_MODEL) ||
-      (llmConfig.LLM === "anthropic" && !llmConfig.ANTHROPIC_MODEL);
+    llmConfig.LLM === "custom" && !llmConfig.CUSTOM_MODEL;
 
     const needsProviderApiKey =
       (llmConfig.LLM === "openai" && !llmConfig.OPENAI_API_KEY) ||
@@ -335,11 +327,7 @@ export default function LLMProviderSelection({
           onValueChange={handleProviderChange}
           className="w-full"
         >
-          <TabsList className="grid w-full grid-cols-5 bg-transparent h-10">
-            <TabsTrigger value="openai">OpenAI</TabsTrigger>
-            <TabsTrigger value="google">Google</TabsTrigger>
-            <TabsTrigger value="anthropic">Anthropic</TabsTrigger>
-            <TabsTrigger value="ollama">Ollama</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-1 bg-transparent h-10">
             <TabsTrigger value="custom">Custom</TabsTrigger>
           </TabsList>
         </Tabs>
@@ -348,51 +336,10 @@ export default function LLMProviderSelection({
       {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto p-6 pt-0 custom_scrollbar">
         <Tabs
-          value={llmConfig.LLM || "openai"}
+          value={llmConfig.LLM || "custom"}
           onValueChange={handleProviderChange}
           className="w-full"
         >
-          {/* OpenAI Content */}
-          <TabsContent value="openai" className="mt-6">
-            <OpenAIConfig
-              openaiApiKey={llmConfig.OPENAI_API_KEY || ""}
-              openaiModel={llmConfig.OPENAI_MODEL || ""}
-              webGrounding={llmConfig.WEB_GROUNDING || false}
-              onInputChange={input_field_changed}
-            />
-          </TabsContent>
-
-          {/* Google Content */}
-          <TabsContent value="google" className="mt-6">
-            <GoogleConfig
-              googleApiKey={llmConfig.GOOGLE_API_KEY || ""}
-              googleModel={llmConfig.GOOGLE_MODEL || ""}
-              webGrounding={llmConfig.WEB_GROUNDING || false}
-              onInputChange={input_field_changed}
-            />
-          </TabsContent>
-
-          {/* Anthropic Content */}
-          <TabsContent value="anthropic" className="mt-6">
-            <AnthropicConfig
-              anthropicApiKey={llmConfig.ANTHROPIC_API_KEY || ""}
-              anthropicModel={llmConfig.ANTHROPIC_MODEL || ""}
-              extendedReasoning={llmConfig.EXTENDED_REASONING || false}
-              webGrounding={llmConfig.WEB_GROUNDING || false}
-              onInputChange={input_field_changed}
-            />
-          </TabsContent>
-
-          {/* Ollama Content */}
-          <TabsContent value="ollama" className="mt-6">
-            <OllamaConfig
-              ollamaModel={llmConfig.OLLAMA_MODEL || ""}
-              ollamaUrl={llmConfig.OLLAMA_URL || ""}
-              useCustomUrl={llmConfig.USE_CUSTOM_URL || false}
-              onInputChange={input_field_changed}
-            />
-          </TabsContent>
-
           {/* Custom Content */}
           <TabsContent value="custom" className="mt-6">
             <CustomConfig
@@ -640,17 +587,7 @@ export default function LLMProviderSelection({
               </h3>
               <p className="text-sm text-blue-700">
                 使用{" "}
-                {llmConfig.LLM === "ollama"
-                  ? llmConfig.OLLAMA_MODEL ?? "xxxxx"
-                  : llmConfig.LLM === "custom"
-                  ? llmConfig.CUSTOM_MODEL ?? "xxxxx"
-                  : llmConfig.LLM === "anthropic"
-                  ? llmConfig.ANTHROPIC_MODEL ?? "xxxxx"
-                  : llmConfig.LLM === "google"
-                  ? llmConfig.GOOGLE_MODEL ?? "xxxxx"
-                  : llmConfig.LLM === "openai"
-                  ? llmConfig.OPENAI_MODEL ?? "xxxxx"
-                  : "xxxxx"}{" "}
+                {llmConfig.CUSTOM_MODEL ?? "xxxxx"}{" "}
                 进行文本生成{" "}
                 {isImageGenerationDisabled ? (
                   "，图片生成已禁用。"
