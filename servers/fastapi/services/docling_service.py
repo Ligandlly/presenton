@@ -19,7 +19,7 @@ class DoclingService:
             print(f"Using pre-downloaded docling models from {model_path}")
 
         self.pipeline_options = PdfPipelineOptions()
-        self.pipeline_options.do_ocr = False
+        self.pipeline_options.do_ocr = True
         self.pipeline_options.artifacts_path = "/app/docling/models"
 
         self.converter = DocumentConverter(
