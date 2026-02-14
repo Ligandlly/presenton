@@ -79,7 +79,7 @@ export default function LLMProviderSelection({
 }: LLMProviderSelectionProps) {
   const [llmConfig, setLlmConfig] = useState<LLMConfig>(initialLLMConfig);
   const [openImageProviderSelect, setOpenImageProviderSelect] = useState(false);
-  const isImageGenerationDisabled = llmConfig.DISABLE_IMAGE_GENERATION ?? false;
+  const isImageGenerationDisabled = llmConfig.DISABLE_IMAGE_GENERATION ?? true;
 
   useEffect(() => {
     onConfigChange(llmConfig);
